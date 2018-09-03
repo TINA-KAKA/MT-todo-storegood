@@ -1,0 +1,60 @@
+.to-do-box,
+.top-img{
+    width: 100%;
+    text-align: center;
+
+}
+
+.todo-i input{
+    line-height: 4rem;
+    border: 1px solid #787878;
+    width: 70%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-bottom: 2rem;
+}
+
+.assign{
+    display: block;
+    margin-left: 10%;
+    width: 80%;
+    color: #fff;
+    background-color: #f95c59;
+    border-radius: 0.4rem;
+    line-height: 4rem;
+    margin-top: 3rem;
+    cursor: pointer;
+}
+
+.todolist{
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.todolist ul li{
+    line-height: 3rem;
+
+}
+
+.todolist li:before {
+    content: "★";
+    color: #000;
+}
+
+.todolist li{
+    border-bottom: 1px dashed #b4b4b4;
+    position: relative;
+}
+
+.todolist li a.bj{
+    display: inline-block;
+    position: absolute;
+    right: 3rem;
+}
+
+.todolist li a.delete{
+    display: inline-block;
+    position: absolute;
+    right: 0;
+
+}
