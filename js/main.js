@@ -4,64 +4,76 @@
 *Description;
 */
 
+$(document).ready(function(){
+   /*页面加载后本地存储的list*/
+    showJdLists();
+      /*键盘时间:空格键=确定*/
+    $('#jd_name').bind('keydown',function(event){
+        if(event.keyCode == "13") {
+            addJdTOBuy();
+        }
+    });
+    /*加入新的胶带list*/
+    $('.assign').click(function () {
+        addJdTOBuy();
+    });
+    /*实现删除操作*/
+    $("#showlist").on('click','.delete',function () {
 
-function t1() {
-    var nowTodo=$("#jd_name").val();
-    var mNum=$("#jd_num").val();
+        var task=$(this).parent("li");
+        var i=task.index();
+        console.log(i);
+        jdList.splice(i,1);
+        console.log(jdList);
+        saveData(jdList);
+        $("ul li").remove();
+        showJdLists();
+    })
+/*本来无一物,何处惹尘埃*/
+});
 
-    if (nowTodo==""){
+var jdList=[];
+function addJdTOBuy() {
+    var obj_list={
+        todo:"",
+    }
+    var jdToBuy=$("#jd_name").val();
+    var mTime=$("#jd_time").val();
+    console.log("-------------------------");
+    console.log(jdToBuy);
+
+    if (jdToBuy==""){
         alert("请输入胶带名称");
         return;
     }
-    if(mNum==""){
+    if(mTime==""){
         alert("请输入米数");
         return;
     }
-    var oli = $("<li>"+nowTodo+"<a class=\"bj\">编辑</a><a class=\"delete\">删除</a></li>")
+    var oli = $("<li>"+jdToBuy+"<a class=\"delete\">删除</a></li>")
     $('ul').append(oli)
+    jdList.push(jdToBuy);
+/*    var str = JSON.stringify(jdList);
+    localStorage.setItem("jdb",str);*/
+     saveData(jdList);
     $('#jd_name').val("");
-    $('#jd_num').val("");
-    console.log($(".delete"));
+    $('#jd_time').val("");
 }
-/*实现编辑操作*/
-function edit(element) {
-
-    var oldhtml=element.innerHTML;
-    /*创建新的input元素*/
-    var newobj=document.createElement("input");
-    /*为新增元素添加类型*/
-    newobj.type='text';
-    /*为新增元素添加value值*/
-    newobj.onblur=oldhtml;
-    /*为新增元素添加光标离开事件*/
-    newobj.onblur=function () {
-        element.innerHTML=this.value==oldhtml ? oldhtml:this.value;
-        /*当触发时判断新增元素值是否为空,为空则不修改,并返回原有值*/
+function showJdLists() {
+    var jdbs=localStorage.getItem("jdb");
+    console.log(JSON.parse(jdbs));
+    var jdbss=JSON.parse(jdbs)
+    console.log(jdbss);
+    /*初始化页面遍历dom*/
+    for (var i=0;i<jdbss.length;i++){
+        var sjdList=$("<li>"+jdbss[i]+"<a class=\"delete\">删除</a></li>");
+        $('ul').append(sjdList);
+        $("#count").innerText=i+1;
     }
-    /*设置该标签的子节点为空*/
-    element.innerHTML="";
-    /*添加该标签的子节点,input对象*/
-    element.appendChild(newobj);
-    /*设置选择文本的内容或设置光标位置(两个参数,start end start 为开始位置*/
 
 }
-    $('#todo').bind('keydown',function(event){
-        if(event.keyCode == "13") {
-            t1();
-        }
-    });
-    $('.assign').click(function () {
-        t1();
-    });
-    /*实现删除操作*/
-    $("#tdl").on('click','.delete',function () {
-        alert(111);
-        var task=$(this).parent("li");
-        console.log(task);
-        task.remove();
-
-    })
-
-
+function saveData(data) {
+    localStorage.setItem("jdb", JSON.stringify(data));   //JS对象转换成JSON对象存进本地缓存
+}
 
 

@@ -15,14 +15,18 @@
     </div>
     <div class="todo-i">
         <input type="text" placeholder="胶带名称" id="jd_name">
-        <input type="text" placeholder="米数" id="jd_num">
+        <input type="text" placeholder="截止日期" id="jd_time">
+        <a href=""></a>
     </div>
-
-    <button class="assign">确定</button>
-
+    <button class="assign" id="btn1">确定</button>
+    <h3>还有 <span id="count" class="warning">0</span>项未完成</h3>
     <div class="todolist">
-        <ul style="text-align: left;" id="tdl">
-
+        <ul style="text-align: left;" id="showlist">
+        </ul>
+    </div>
+    <h3>已经完成 <span id="overCount" class="success">0</span>项</h3>
+    <div class="todolist">
+        <ul id="overList" style="text-align: left;" class="show">
         </ul>
     </div>
 
